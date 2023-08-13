@@ -1,15 +1,12 @@
 # water-quality-prediction
 
-Aug-12-2023:
+Aug-13-2023:
 
-Yinpu: 
+Confirm we abandon time and spatial characteristics. Now they are rows.
 
-Check: [data notes](docs/data.md)
+And we can proceed to regression.
 
-We have successfully imported the data. But we need to deep dive into the data and understand how to use them. 
+Data files are in data folder.
 
-We need to decide how to prepare the data.
+Next step is EDA. Then regression.
 
-Maybe finish 3 ToDo in src / data_input.py. 
-
-Here is what I suggested to do: go through the data/README.docx and understand; basic EDA. 
