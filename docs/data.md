@@ -18,5 +18,5 @@
 
 
 __NOTES:__
-- Yinpu: I do not understand what is **contiguous dates**
+
 
