@@ -11,12 +11,85 @@ def load_data(file_path='data/water_dataset.mat'):
 # TODO: need to decide what to do formulate the data.
 
 
+########## input: for training set 
+
+
+def data_prep_X(df):
+    
+    """
+    Prepare train/test feature matrix, flatten the time-spatial into rows.
+
+    df_out 
+        - for train is  (37 * 423) * 11
+        - for test is (37 * 283) * 111
+
+    n_rows = (37 * 423)
+        - K = 37 locations
+        - N_{tr} = 423 days
+
+    n_col = 11
+        - p = 11 features
+    
+    """
+
+    df_out = pd.DataFrame()
+    
+    length_df = df.shape[1]
+
+    for i in range(length_df):
+
+            df_out = pd.concat([df_out,pd.DataFrame(df[0,i])], axis = 0)
+    
+    
+    return df_out
+
+
+def gen_col_name(p=11):
+     # Generating a list of column names from X1 to X10
+    column_names = [f'X{i}' for i in range(1, p+1)]
+    return column_names
+
+
+
+def data_pre_Y(df):
+    
+    """
+    Prepare train/test response set, flatten the time-spatial into rows.
+
+    df_out 
+        - for train is  (37 * 423) * 1
+        - for test is (37 * 283) * 1
+
+    n_rows = (37 * 423)
+        - K = 37 locations
+        - N_{tr} = 423 days
+
+    n_col = 11
+        - p = 11 features
+    
+    """
+    df = pd.DataFrame(df)
+    df_out = pd.DataFrame()
+    
+    length_df = df.shape[1]
+
+    
+    for i in range(length_df):
+        df_out = pd.concat([df_out,df.loc[:,i]], axis = 0)
+    
+    
+    return df_out
+
+
+
+
 # def get_df():
 
 
 
 def save_csv(df, file_path, index=False):
     _dir = os.path.dirname(file_path)
-    os.makedir(_dir, exit_ok=True)
+    os.makedirs(_dir, exist_ok=True)
 
-    df.to_csv(file_path, index = index)
+    df.to_csv(file_path, index=index)
+
