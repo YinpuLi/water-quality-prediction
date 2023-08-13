@@ -1,44 +1,52 @@
+import pandas as pd
 import os
 import sys
+import ast
 
 root_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+sys.path.append(root_dir)
 
-import pandas as pd
-from scipy.io import loadmat
-
-
-
-loaded_data = loadmat('data/water_dataset.mat')
-
-loaded_df = pd.json_normalize(loaded_data)
-
-print(loaded_data.keys())
-print()
-print(loaded_df.columns)
-# Index(['__header__', '__version__', '__globals__', 'X_tr', 'X_te', 'Y_tr',
-#        'Y_te', 'location_group', 'features', 'location_ids'],
-#       dtype='object')
-
-# TODO 1: What is this location_group?
-print(loaded_data['location_group'])
-
-# TODO 2: How to understand this features??
-print(loaded_data['features'])
-
-# TODO 3: How to handle this location_ids?? Cluster? Segmentation?
-print(loaded_data['location_ids'])
+from utils.utils import load_data
 
 
+data = load_data('data/water_dataset.mat')
+
+# Convert string representation of arrays to actual arrays
+for key in data:
+    if key.endswith('_tr') or key.endswith('_te'):
+        data[key] = ast.literal_eval(data[key])
+
+# Create a DataFrame
+df = pd.DataFrame(data)
+
+# Save DataFrame to a CSV file
+df.to_csv('output.csv', index=False)
+
+
+# print()
+
+# # TODO 1: What is this location_group?
+# print(loaded_df['location_group'])
+
+# # TODO 2: How to understand this features??
+# print(loaded_df['features'])
+
+# # TODO 3: How to handle this location_ids?? Cluster? Segmentation?
+# print(loaded_df['location_ids'])
+
+# location_group = loaded_df['location_group']
+# features = loaded_df['features']
+# location_ids = loaded_df['location_ids']
 
 
 
-X_tr = loaded_data['X_tr']
-Y_tr = loaded_data['Y_tr']
-X_te = loaded_data['X_te']
-Y_te = loaded_data['Y_te']
+# X_tr = pd.DataFrame(loaded_df['X_tr'])
+# Y_tr = pd.DataFrame(loaded_df['Y_tr'])
+# X_te = pd.DataFrame(loaded_df['X_te'])
+# Y_te = pd.DataFrame(loaded_df['Y_te'])
 
-location_group = loaded_data['location_group']
-features = loaded_data['features']
-location_ids = loaded_data['location_ids']
+# print(X_tr.head())
+# print(X_tr.columns)
 
+# X_tr.to_csv('data/X_tr.csv')
 
