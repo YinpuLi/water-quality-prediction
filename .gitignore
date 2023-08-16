@@ -1,0 +1,32 @@
+# Ignore compiled files
+*.pyc
+*.pyo
+__pycache__/
+
+# Ignore macOS system files
+.DS_Store
+
+# Ignore virtual environment files
+venv/
+env/
+*.env
+
+# Ignore local development config
+config.local.json
+
+# Ignore IDE specific files
+.vscode/
+.idea/
+
+# Ignore logs
+*.log
+
+# Ignore sensitive data
+secret.txt
+
+# Ignore database files
+db.sqlite3
+
+# Ignore package manager files
+docs/yl_learnings
+
