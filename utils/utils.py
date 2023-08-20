@@ -1,10 +1,69 @@
 import pandas as pd
 from scipy.io import loadmat
+from datetime import datetime, timedelta
+
 import os
 import sys
 
-root_dir = os.path.abspath(os.path.join(os.getcwd(), '..'))
+
+root_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 sys.path.append(root_dir)
+
+
+
+from utils.constants import *
+
+
+
+
+def get_train_dates_col(start_date: datetime = datetime.strptime(train_start, "%Y-%m-%d"),
+                  num_days: int = n_tr) -> list:
+    """
+    Generate a list of date strings starting from a given start_date.
+
+    Args:
+        start_date (datetime, optional): The start date. Defaults to "2016-01-28".
+        num_days (int, optional): The number of days to generate. Defaults to 423.
+
+    Returns:
+        list: A list of date strings in the format "%Y-%m-%d".
+
+
+    Example usage
+    print(get_train_dates_col(start_date=datetime.strptime(train_start, "%Y-%m-%d"), num_days=1))
+    # Expected results: 
+    ['2016-01-28']
+    """
+    date_strings = [(start_date + timedelta(days=i)).strftime("%Y-%m-%d") for i in range(num_days)]
+    return date_strings
+
+
+
+def get_test_dates_col(end_date: datetime = datetime.strptime(test_end, "%Y-%m-%d"),#datetime.today(),
+                  num_days: int = n_te) -> list:
+    """
+    Generate a list of date strings up to a given end_date.
+
+    Args:
+        end_date (datetime, optional): The end date. Defaults to today's date.
+        num_days (int, optional): The number of days to generate. Defaults to 423.
+
+    Returns:
+        list: A list of date strings in the format "%Y-%m-%d".
+
+    Example usage:
+    print(get_test_dates_col(num_days=1)) # ['2018-01-01']
+    """
+    start_date = end_date - timedelta(days=num_days - 1)
+    date_strings = [(start_date + timedelta(days=i)).strftime("%Y-%m-%d") for i in range(num_days)]
+    return date_strings
+
+
+
+
+
+
+
 
 def get_absolute_path(
           file_name:str='water_dataset.mat'
@@ -12,10 +71,6 @@ def get_absolute_path(
           , base_dir = '/Users/yinpuli/Documents/python-projects/water-quality-prediction'#os.path.abspath(os.path.join(os.getcwd(), '..'))
 ):
      return os.path.join(base_dir, rel_path, file_name)
-
-
-def func():
-     return 
 
 
 
