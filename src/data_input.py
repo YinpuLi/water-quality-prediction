@@ -3,14 +3,21 @@ import os
 import sys
 import ast
 
-root_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+root_dir = os.path.abspath(os.path.join(os.getcwd(), '..'))
 sys.path.append(root_dir)
 
 
-from utils.utils import load_data, save_csv, data_prep_X, gen_col_name, data_pre_Y
+# root_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+# sys.path.append(root_dir)
+
+
+
+
+from utils.utils import get_absolute_path, load_data, save_csv, data_prep_X, gen_col_name, data_pre_Y
 from utils.constants import *
 
-data = load_data('data/water_dataset.mat')
+data_path = get_absolute_path('water_dataset.mat', 'data')
+data = load_data(data_path)
 x_train = data['X_tr']
 x_test = data['X_te']
 y_train= data['Y_tr']
