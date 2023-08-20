@@ -1,8 +1,26 @@
 import pandas as pd
 from scipy.io import loadmat
 import os
+import sys
 
-def load_data(file_path='data/water_dataset.mat'):
+root_dir = os.path.abspath(os.path.join(os.getcwd(), '..'))
+sys.path.append(root_dir)
+
+def get_absolute_path(
+          file_name:str='water_dataset.mat'
+          , rel_path:str='data'
+          , base_dir = '/Users/yinpuli/Documents/python-projects/water-quality-prediction'#os.path.abspath(os.path.join(os.getcwd(), '..'))
+):
+     return os.path.join(base_dir, rel_path, file_name)
+
+
+def func():
+     return 
+
+
+
+def load_data(file_path#='data/water_dataset.mat'
+              ):
     loaded_data = loadmat(file_path)
     # loaded_df = pd.json_normalize(loaded_data)
     # return loaded_df
@@ -21,7 +39,7 @@ def data_prep_X(df):
 
     df_out 
         - for train is  (37 * 423) * 11
-        - for test is (37 * 283) * 111
+        - for test is (37 * 283) * 11
 
     n_rows = (37 * 423)
         - K = 37 locations
@@ -92,4 +110,3 @@ def save_csv(df, file_path, index=False):
     os.makedirs(_dir, exist_ok=True)
 
     df.to_csv(file_path, index=index)
-
