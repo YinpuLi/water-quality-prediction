@@ -26,4 +26,33 @@ column_data_types = {
     'Location_ID': str
 }
 
+column_names_raw = [
+    'Specific conductance, water, unfiltered, microsiemens per centimeter at 25 degrees Celsius (Maximum)',
+    'pH, water, unfiltered, field, standard units (Maximum)',
+    'pH, water, unfiltered, field, standard units (Minimum)',
+    'Specific conductance, water, unfiltered, microsiemens per centimeter at 25 degrees Celsius (Minimum)',
+    'Specific conductance, water, unfiltered, microsiemens per centimeter at 25 degrees Celsius (Mean)',
+    'Dissolved oxygen, water, unfiltered, milligrams per liter (Maximum)',
+    'Dissolved oxygen, water, unfiltered, milligrams per liter (Mean)',
+    'Dissolved oxygen, water, unfiltered, milligrams per liter (Minimum)',
+    'Temperature, water, degrees Celsius (Mean)',
+    'Temperature, water, degrees Celsius (Minimum)',
+    'Temperature, water, degrees Celsius (Maximum)'
+]
+
+column_names_extended = [
+    'Specific conductance, water, unfiltered, microsiemens per centimeter at 25 degrees Celsius (Maximum)',
+    'pH, water, unfiltered, field, standard units (Maximum)',
+    'pH, water, unfiltered, field, standard units (Minimum)',
+    'Specific conductance, water, unfiltered, microsiemens per centimeter at 25 degrees Celsius (Minimum)',
+    'Specific conductance, water, unfiltered, microsiemens per centimeter at 25 degrees Celsius (Mean)',
+    'Dissolved oxygen, water, unfiltered, milligrams per liter (Maximum)',
+    'Dissolved oxygen, water, unfiltered, milligrams per liter (Mean)',
+    'Dissolved oxygen, water, unfiltered, milligrams per liter (Minimum)',
+    'Temperature, water, degrees Celsius (Mean)',
+    'Temperature, water, degrees Celsius (Minimum)',
+    'Temperature, water, degrees Celsius (Maximum)',
+    'Date',
+    'Location_ID'
+]
 

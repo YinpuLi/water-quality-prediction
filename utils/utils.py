@@ -50,8 +50,8 @@ def save_model(file_name, model, model_info=None):
     directory = os.path.dirname(file_name)
     if not os.path.exists(directory):
         os.makedirs(directory, exist_ok=True)
-    elif os.path.exists(file_name):
-        raise ValueError(f"File '{file_name}' already exists. Please provide a new file name.")
+    # elif os.path.exists(file_name):
+    #     raise ValueError(f"File '{file_name}' already exists. Please provide a new file name.")
 
     joblib.dump((model, model_info), file_name)
 
