@@ -58,10 +58,74 @@ def get_test_dates_col(end_date: datetime = datetime.strptime(test_end, "%Y-%m-%
     date_strings = [(start_date + timedelta(days=i)).strftime("%Y-%m-%d") for i in range(num_days)]
     return date_strings
 
+# def add_train_dates_col(
+#         loaded_data
+#         , start_date = datetime.strptime(train_start, "%Y-%m-%d")
+#         , num_days = n_tr
+        
+# ):
+#     """
+#     loaded_data: raw results (a dictionary) from load_data
+
+#     """
+#     # Iterate through the X_tr data frame and add the date column
+#     for d in range(num_days):
+#         date = start_date + timedelta(days = d)
+#         date_str = date.strftime("%Y-%m-%d")
+
+        
+
+#         for index, row in loaded_data['X_tr'][0][d].iterrows():
+#             # Get the corresponding location_id from location_ids
+#             location_id = loaded_data['location_ids'][index]
+
+#             loaded_data['X_tr'][0][d].loc[index, 'Date'] = date_str
+#             loaded_data['X_tr'][0][d].loc[index, 'Location_ID'] = location_id
 
 
+#     return loaded_data
 
 
+def add_train_dates_col(
+        loaded_data
+        , start_date=None
+        , num_days=None
+):
+    """
+
+    Adding new feature columns that contain time (contiguous dates), location (location_ids) info.
+
+    loaded_data: raw results (a dictionary) from load_data
+    start_date: the start date for the date column
+    num_days: the number of days for which the date column needs to be added
+    """
+    if start_date is None:
+        start_date = datetime.strptime("2016-01-28", "%Y-%m-%d")
+    if num_days is None:
+        num_days = len(loaded_data['X_tr'][0])
+
+    # Extract the individual column names from the nested array
+    features = [name[0] for name in loaded_data['features'][0]]
+
+    # Iterate through the X_tr data frame and add the date column
+    for d in range(num_days):
+        date = start_date + timedelta(days=d)
+        date_str = date.strftime("%Y-%m-%d")
+
+        # Convert the NumPy array to a Pandas DataFrame
+        df = pd.DataFrame(loaded_data['X_tr'][0][d], columns=features)
+
+        for index, row in df.iterrows():
+            # Get the corresponding location_id from location_ids
+            location_id = loaded_data['location_ids'][index]
+
+            df.loc[index, 'Date'] = date_str
+            df.loc[index, 'Location_ID'] = location_id
+
+        # Store the modified DataFrame back into the array
+        loaded_data['X_tr'][0][d] = df#.values
+
+    return loaded_data
 
 
 
@@ -77,11 +141,9 @@ def get_absolute_path(
 def load_data(file_path#='data/water_dataset.mat'
               ):
     loaded_data = loadmat(file_path)
-    # loaded_df = pd.json_normalize(loaded_data)
-    # return loaded_df
     return loaded_data
     
-# TODO: need to decide what to do formulate the data.
+
 
 
 ########## input: for training set 
