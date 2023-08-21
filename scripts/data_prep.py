@@ -34,3 +34,16 @@ print(stacked_X_tr.shape)
 print(stacked_X_te.shape)
 # (15651, 13)
 # (10434, 13)
+
+
+stacked_X_tr_path = get_absolute_path(
+    'stacked_X_tr.csv'
+    , rel_path='data'
+)
+
+stacked_X_te_path = get_absolute_path(
+    'stacked_X_te.csv'
+    , rel_path='data'
+)
+save_csv(stacked_X_tr, stacked_X_tr_path)
+save_csv(stacked_X_te, stacked_X_te_path)
