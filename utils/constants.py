@@ -10,3 +10,20 @@ n_te = 282 # num of contiguous dates in testing data
 train_start = "2016-01-28"
 test_end = '2018-01-01'
 
+column_data_types = {
+    'Specific conductance, water, unfiltered, microsiemens per centimeter at 25 degrees Celsius (Maximum)': float,
+    'pH, water, unfiltered, field, standard units (Maximum)': float,
+    'pH, water, unfiltered, field, standard units (Minimum)': float,
+    'Specific conductance, water, unfiltered, microsiemens per centimeter at 25 degrees Celsius (Minimum)': float,
+    'Specific conductance, water, unfiltered, microsiemens per centimeter at 25 degrees Celsius (Mean)': float,
+    'Dissolved oxygen, water, unfiltered, milligrams per liter (Maximum)': float,
+    'Dissolved oxygen, water, unfiltered, milligrams per liter (Mean)': float,
+    'Dissolved oxygen, water, unfiltered, milligrams per liter (Minimum)': float,
+    'Temperature, water, degrees Celsius (Mean)': float,
+    'Temperature, water, degrees Celsius (Minimum)': float,
+    'Temperature, water, degrees Celsius (Maximum)': float,
+    'Date': str,
+    'Location_ID': str
+}
+
+

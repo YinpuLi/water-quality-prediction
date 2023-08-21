@@ -15,16 +15,12 @@ from utils.constants import *
 data_path = get_absolute_path('water_dataset.mat', 'data')
 loaded_data = load_data(data_path)
 # Extract the feature names from loaded_data['features']
-feature_names = [name[0] for name in loaded_data['features'][0]]
-
+feature_names = [name[0] for name in loaded_data['features'][0]] + ['Date', 'Location_ID']
 updated_loaded_data = add_temporal_spatial_cols(loaded_data)
 stacked_X_tr, stacked_X_te = stack_dataframes(updated_loaded_data)
 # Set the column names of the stacked_X_tr, stacked_X_te dataframes
-stacked_X_tr.columns = feature_names + ['Date', 'Location_ID']
-stacked_X_te.columns = feature_names + ['Date', 'Location_ID']
-
-
-
+stacked_X_tr.columns = feature_names 
+stacked_X_te.columns = feature_names
 
 stacked_X_tr = stacked_X_tr.astype(column_data_types)
 stacked_X_te = stacked_X_te.astype(column_data_types)
@@ -33,4 +29,8 @@ stacked_X_te = stacked_X_te.astype(column_data_types)
 print(stacked_X_tr.head)
 print(stacked_X_te.head)
 
-print(stacked_X_te.columns)
+
+print(stacked_X_tr.shape)
+print(stacked_X_te.shape)
+# (15651, 13)
+# (10434, 13)
