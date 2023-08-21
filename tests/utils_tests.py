@@ -13,11 +13,9 @@ from utils.constants import *
 
 
 data_path = get_absolute_path('water_dataset.mat', 'data')
-# print(data_path) # /Users/yinpuli/Documents/python-projects/water-quality-prediction/data/water_dataset.mat
-
 loaded_data = load_data(data_path)
 
-updated_loaded_data = add_train_dates_col(loaded_data)
+updated_loaded_data = add_temporal_spatial_cols(loaded_data)
 
 
 
@@ -27,6 +25,17 @@ temp_df = pd.DataFrame(updated_loaded_data['X_tr'][0][len(updated_loaded_data['X
 print(updated_loaded_data['X_tr'][0][0].shape)
 print(temp_df.shape)
 print(temp_df.columns)
+print(temp_df)
+
+print()
+print()
+print()
+
+temp_df = pd.DataFrame(updated_loaded_data['X_te'][0][len(updated_loaded_data['X_te'][0])-1])
+print(updated_loaded_data['X_te'][0][1].shape)
+print(temp_df.shape)
+print(temp_df.columns)
+print(temp_df)
 
 # # print(loaded_data['X_tr'][0][0].shape)
 
