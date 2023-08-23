@@ -38,8 +38,8 @@ print(stacked_X_te.head)
 
 print(stacked_X_tr.shape)
 print(stacked_X_te.shape)
-# (15651, 13)
-# (10434, 13)
+# (15651, 17)
+# (10434, 17)
 
 
 stacked_X_tr_path = get_absolute_path(
