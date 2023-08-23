@@ -28,8 +28,9 @@ stacked_X_tr, stacked_X_te = stack_dataframes(updated_loaded_data)
 stacked_X_tr.columns = feature_names 
 stacked_X_te.columns = feature_names
 
-stacked_X_tr = stacked_X_tr.astype(column_data_types)
-stacked_X_te = stacked_X_te.astype(column_data_types)
+
+stacked_X_tr = stacked_X_tr.astype(column_data_extended_types)
+stacked_X_te = stacked_X_te.astype(column_data_extended_types)
 
 
 print(stacked_X_tr.head)
