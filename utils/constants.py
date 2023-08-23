@@ -23,7 +23,11 @@ column_data_types = {
     'Temperature, water, degrees Celsius (Minimum)': float,
     'Temperature, water, degrees Celsius (Maximum)': float,
     'Date': str,
-    'Location_ID': str
+    'Location_ID': str,
+    'Year': str,
+    'Month': str,
+    'Week': str,
+    'Weekday': str
 }
 
 column_names_raw = [
@@ -53,6 +57,11 @@ column_names_extended = [
     'Temperature, water, degrees Celsius (Minimum)',
     'Temperature, water, degrees Celsius (Maximum)',
     'Date',
-    'Location_ID'
+    'Location_ID',
+    'Year',
+    'Month',
+    'Week',
+    'Weekday'
+
 ]
 
