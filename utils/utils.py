@@ -123,6 +123,8 @@ def get_test_dates_col(end_date: datetime = datetime.strptime(test_end, "%Y-%m-%
     return date_strings
 
 
+
+
 def add_temporal_spatial_cols(
         loaded_data
         , start_date=None
@@ -163,6 +165,10 @@ def add_temporal_spatial_cols(
             location_id = loaded_data['location_ids'][index]
             df.loc[index, 'Date'] = date_str
             df.loc[index, 'Location_ID'] = location_id
+            df.loc[index, 'Year'] = date.year
+            df.loc[index, 'Month'] = date.month
+            df.loc[index, 'Week'] = date.isocalendar().week
+            df.loc[index, 'Weekday'] = date.weekday()
 
     # Iterate through the X_te data frames and add the date and location columns
     for d, df in reversed(list(enumerate(test_dfs))):
@@ -171,8 +177,12 @@ def add_temporal_spatial_cols(
 
         for index, row in df.iterrows():
             location_id = loaded_data['location_ids'][index]
-            df.loc[index, 'Date'] = date_str            
+            df.loc[index, 'Date'] = date_str
             df.loc[index, 'Location_ID'] = location_id
+            df.loc[index, 'Year'] = date.year
+            df.loc[index, 'Month'] = date.month
+            df.loc[index, 'Week'] = date.isocalendar().week
+            df.loc[index, 'Weekday'] = date.weekday()
 
     # Store the modified DataFrames back into the dictionary
     loaded_data['X_tr'][0] = [df.values for df in train_dfs]
