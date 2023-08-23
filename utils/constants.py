@@ -10,7 +10,7 @@ n_te = 282 # num of contiguous dates in testing data
 train_start = "2016-01-28"
 test_end = '2018-01-01'
 
-column_data_types = {
+column_data_extended_types = {
     'Specific conductance, water, unfiltered, microsiemens per centimeter at 25 degrees Celsius (Maximum)': float,
     'pH, water, unfiltered, field, standard units (Maximum)': float,
     'pH, water, unfiltered, field, standard units (Minimum)': float,
