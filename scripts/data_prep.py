@@ -16,7 +16,7 @@ data_path = get_absolute_path('water_dataset.mat', 'data')
 loaded_data = load_data(data_path)
 # Extract the feature names from loaded_data['features']
 feature_names = [name[0] for name in loaded_data['features'][0]] + ['Date', 'Location_ID',
-    'Year',
+    # 'Year',
     'Month',
     'Week',
     'Weekday']
@@ -39,8 +39,8 @@ print(stacked_X_te.head)
 
 print(stacked_X_tr.shape)
 print(stacked_X_te.shape)
-# (15651, 17)
-# (10434, 17)
+# (15651, 16)
+# (10434, 16)
 
 
 stacked_X_tr_path = get_absolute_path(

@@ -165,7 +165,7 @@ def add_temporal_spatial_cols(
             location_id = loaded_data['location_ids'][index]
             df.loc[index, 'Date'] = date_str
             df.loc[index, 'Location_ID'] = location_id
-            df.loc[index, 'Year']    = str(int(date.year))
+            # df.loc[index, 'Year']    = str(int(date.year))
             df.loc[index, 'Month']   = str(int(date.month))
             df.loc[index, 'Week']    = str(int(date.isocalendar().week))
             df.loc[index, 'Weekday'] = str(int(date.weekday()))
@@ -179,7 +179,7 @@ def add_temporal_spatial_cols(
             location_id = loaded_data['location_ids'][index]
             df.loc[index, 'Date'] = date_str
             df.loc[index, 'Location_ID'] = location_id
-            df.loc[index, 'Year']    = str(int(date.year))
+            # df.loc[index, 'Year']    = str(int(date.year))
             df.loc[index, 'Month']   = str(int(date.month))
             df.loc[index, 'Week']    = str(int(date.isocalendar().week))
             df.loc[index, 'Weekday'] = str(int(date.weekday()))
