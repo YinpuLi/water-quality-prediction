@@ -27,7 +27,8 @@ column_data_extended_types = {
     # 'Year': str,
     'Month': str,
     'Week': str,
-    'Weekday': str
+    'Weekday': str,
+    'Season': str
 }
 
 column_names_raw = [
@@ -61,7 +62,8 @@ column_names_extended = [
     # 'Year',
     'Month',
     'Week',
-    'Weekday'
+    'Weekday',
+    'Season'
 
 ]
 
