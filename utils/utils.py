@@ -197,7 +197,9 @@ def add_temporal_spatial_cols(
 
             # Add season based on month
             if 3 <= date.month <= 5:
+                print("Add Season")
                 df.loc[index, 'Season'] = 'Spring'
+                print("Add Season_Num")
                 df.loc[index, 'Season_Num'] = 1  # Spring
             elif 6 <= date.month <= 8:
                 df.loc[index, 'Season'] = 'Summer'
