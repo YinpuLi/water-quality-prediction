@@ -28,7 +28,7 @@ column_data_extended_types = {
     'Month': str,
     'Week': str,
     'Weekday': str,
-    'Season_Num': str,
+    'Season': str,
     'Season_Num': int
 }
 
