@@ -30,28 +30,28 @@ stacked_X_te.columns = column_names_extended
 print(stacked_X_tr.columns)
 print(stacked_X_tr.head)
 
-# stacked_X_tr = stacked_X_tr.astype(column_data_extended_types)
-# stacked_X_te = stacked_X_te.astype(column_data_extended_types)
+stacked_X_tr = stacked_X_tr.astype(column_data_extended_types)
+stacked_X_te = stacked_X_te.astype(column_data_extended_types)
 
 
-# print(stacked_X_tr.head)
-# print(stacked_X_te.head)
+print(stacked_X_tr.head)
+print(stacked_X_te.head)
 
 
-# print(stacked_X_tr.shape)
-# print(stacked_X_te.shape)
-# # (15651, 16)
-# # (10434, 16)
+print(stacked_X_tr.shape)
+print(stacked_X_te.shape)
+# (15651, 16)
+# (10434, 16)
 
 
-# stacked_X_tr_path = get_absolute_path(
-#     'stacked_X_tr.csv'
-#     , rel_path='data'
-# )
+stacked_X_tr_path = get_absolute_path(
+    'stacked_X_tr.csv'
+    , rel_path='data'
+)
 
-# stacked_X_te_path = get_absolute_path(
-#     'stacked_X_te.csv'
-#     , rel_path='data'
-# )
-# save_csv(stacked_X_tr, stacked_X_tr_path)
-# save_csv(stacked_X_te, stacked_X_te_path)
+stacked_X_te_path = get_absolute_path(
+    'stacked_X_te.csv'
+    , rel_path='data'
+)
+save_csv(stacked_X_tr, stacked_X_tr_path)
+save_csv(stacked_X_te, stacked_X_te_path)
