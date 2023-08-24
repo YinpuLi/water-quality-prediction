@@ -19,6 +19,9 @@ loaded_data = load_data(data_path)
 updated_loaded_data = add_temporal_spatial_cols(loaded_data)
 stacked_X_tr, stacked_X_te = stack_dataframes(updated_loaded_data)
 
+
+print(stacked_X_tr.head)
+
 # Set the column names of the stacked_X_tr, stacked_X_te dataframes
 stacked_X_tr.columns = column_names_extended 
 stacked_X_te.columns = column_names_extended
