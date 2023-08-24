@@ -123,15 +123,7 @@ def get_test_dates_col(end_date: datetime = datetime.strptime(test_end, "%Y-%m-%
     return date_strings
 
 
-def get_season_number(month):
-    if 3 <= month <= 5:
-        return 1  # Spring
-    elif 6 <= month <= 8:
-        return 2  # Summer
-    elif 9 <= month <= 11:
-        return 3  # Fall
-    else:
-        return 4  # Winter
+
 
 def add_temporal_spatial_cols(
         loaded_data
@@ -168,8 +160,6 @@ def add_temporal_spatial_cols(
     for d, df in enumerate(train_dfs):
         date = start_date + timedelta(days=d)
         date_str = date.strftime("%Y-%m-%d")
-        season_num = get_season_number(date.month)
-        df.loc[index, 'Season_Num'] = season_num
 
         for index, row in df.iterrows():
             location_id = loaded_data['location_ids'][index]
@@ -183,20 +173,22 @@ def add_temporal_spatial_cols(
             # Add season based on month
             if 3 <= date.month <= 5:
                 df.loc[index, 'Season'] = 'Spring'
+                df.loc[index, 'Season_Num'] = 1  # Spring
             elif 6 <= date.month <= 8:
                 df.loc[index, 'Season'] = 'Summer'
+                df.loc[index, 'Season_Num'] = 2  # Summer
             elif 9 <= date.month <= 11:
                 df.loc[index, 'Season'] = 'Fall'
+                df.loc[index, 'Season_Num'] = 3  # Fall
             else:
                 df.loc[index, 'Season'] = 'Winter'
+                df.loc[index, 'Season_Num'] = 4  # Winter
 
 
     # Iterate through the X_te data frames and add the date and location columns
     for d, df in reversed(list(enumerate(test_dfs))):
         date = end_date - timedelta(days=d)
         date_str = date.strftime("%Y-%m-%d")
-        season_num = get_season_number(date.month)
-        df.loc[index, 'Season_Num'] = season_num
 
         for index, row in df.iterrows():
             location_id = loaded_data['location_ids'][index]
@@ -210,12 +202,16 @@ def add_temporal_spatial_cols(
             # Add season based on month
             if 3 <= date.month <= 5:
                 df.loc[index, 'Season'] = 'Spring'
+                df.loc[index, 'Season_Num'] = 1  # Spring
             elif 6 <= date.month <= 8:
                 df.loc[index, 'Season'] = 'Summer'
+                df.loc[index, 'Season_Num'] = 2  # Summer
             elif 9 <= date.month <= 11:
                 df.loc[index, 'Season'] = 'Fall'
+                df.loc[index, 'Season_Num'] = 3  # Fall
             else:
                 df.loc[index, 'Season'] = 'Winter'
+                df.loc[index, 'Season_Num'] = 4  # Winter
 
 
     # Store the modified DataFrames back into the dictionary
@@ -239,10 +235,6 @@ def stack_dataframes(loaded_data):
 
     # Stack X_te dataframes by row
     stacked_X_te = pd.concat([pd.DataFrame(arr) for arr in loaded_data['X_te'][0]], ignore_index=True)
-
-    print("Printing shape")
-    print(stacked_X_tr.shape)
-
     return stacked_X_tr, stacked_X_te
 
 
