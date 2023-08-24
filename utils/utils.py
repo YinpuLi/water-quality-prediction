@@ -170,6 +170,17 @@ def add_temporal_spatial_cols(
             df.loc[index, 'Week']    = str(int(date.isocalendar().week))
             df.loc[index, 'Weekday'] = str(int(date.weekday()))
 
+            # Add season based on month
+            if 3 <= date.month <= 5:
+                df.loc[index, 'Season'] = 'Spring'
+            elif 6 <= date.month <= 8:
+                df.loc[index, 'Season'] = 'Summer'
+            elif 9 <= date.month <= 11:
+                df.loc[index, 'Season'] = 'Fall'
+            else:
+                df.loc[index, 'Season'] = 'Winter'
+
+
     # Iterate through the X_te data frames and add the date and location columns
     for d, df in reversed(list(enumerate(test_dfs))):
         date = end_date - timedelta(days=d)
@@ -183,6 +194,17 @@ def add_temporal_spatial_cols(
             df.loc[index, 'Month']   = str(int(date.month))
             df.loc[index, 'Week']    = str(int(date.isocalendar().week))
             df.loc[index, 'Weekday'] = str(int(date.weekday()))
+
+            # Add season based on month
+            if 3 <= date.month <= 5:
+                df.loc[index, 'Season'] = 'Spring'
+            elif 6 <= date.month <= 8:
+                df.loc[index, 'Season'] = 'Summer'
+            elif 9 <= date.month <= 11:
+                df.loc[index, 'Season'] = 'Fall'
+            else:
+                df.loc[index, 'Season'] = 'Winter'
+
 
     # Store the modified DataFrames back into the dictionary
     loaded_data['X_tr'][0] = [df.values for df in train_dfs]
