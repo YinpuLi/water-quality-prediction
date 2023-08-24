@@ -198,19 +198,32 @@ def add_temporal_spatial_cols(
             # Add season based on month
             if 3 <= date.month <= 5:
                 df.loc[index, 'Season'] = 'Spring'
+                df.loc[index, 'Season_Num'] = 1  # Spring
             elif 6 <= date.month <= 8:
                 df.loc[index, 'Season'] = 'Summer'
+                df.loc[index, 'Season_Num'] = 2  # Summer
             elif 9 <= date.month <= 11:
                 df.loc[index, 'Season'] = 'Fall'
+                df.loc[index, 'Season_Num'] = 3  # Fall
             else:
                 df.loc[index, 'Season'] = 'Winter'
+                df.loc[index, 'Season_Num'] = 4  # Winter
 
 
     # Store the modified DataFrames back into the dictionary
     loaded_data['X_tr'][0] = [df.values for df in train_dfs]
     loaded_data['X_te'][0] = [df.values for df in test_dfs]
 
+
     return loaded_data
+
+
+
+
+
+
+
+
 
 
 def stack_dataframes(loaded_data):

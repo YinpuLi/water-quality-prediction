@@ -28,8 +28,10 @@ column_data_extended_types = {
     'Month': str,
     'Week': str,
     'Weekday': str,
-    'Season': str
+    'Season_Num': str,
+    'Season_Num': int
 }
+
 
 column_names_raw = [
     'Specific conductance, water, unfiltered, microsiemens per centimeter at 25 degrees Celsius (Maximum)',
@@ -63,7 +65,6 @@ column_names_extended = [
     'Month',
     'Week',
     'Weekday',
-    'Season'
-
+    'Season',
+    'Season_Num'
 ]
-
