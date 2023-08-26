@@ -68,3 +68,6 @@ column_names_extended = [
     'Season',
     'Season_Num'
 ]
+
+
+EVAL_METRIC_LIST = ['rmse','mape','wmape','wbias','wuforec','woforec']

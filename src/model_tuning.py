@@ -82,7 +82,13 @@ def hyperparameter_tuning(
     y_pred = best_model.predict(X_test)
 
     # Calculate evaluation metrics
-    eval_metrics = eval_func(y_test['measurement'], y_pred)
+    _df = pd.DataFrame(
+        {
+            'forecast': y_pred,
+            'actual': y_test['measurement']
+        }
+    )
+    eval_metrics = eval_func(_df, EVAL_METRIC_LIST)
 
     # Get feature importance scores
     feature_importance = best_model.feature_importances_
