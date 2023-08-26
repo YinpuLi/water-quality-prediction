@@ -4,7 +4,9 @@ import sys
 import ast
 from typing import Union
 import xgboost as xgb
+import lightgbm as lgb
 from sklearn.ensemble import RandomForestRegressor
+from sklearn.neural_network import MLPRegressor
 from sklearn.model_selection import GridSearchCV
 
 root_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
@@ -23,7 +25,9 @@ def hyperparameter_tuning(
         X_test: pd.DataFrame,
         y_test: pd.DataFrame,
         param_grid: dict,
-        model: Union[xgb.sklearn.XGBRegressor, RandomForestRegressor],
+        model: Union[xgb.sklearn.XGBRegressor, RandomForestRegressor
+                     , lgb.LGBMRegressor, MLPRegressor
+                     ],
         scoring,
         eval_func,
         file_path: str,
