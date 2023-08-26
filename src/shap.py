@@ -29,6 +29,14 @@ def gen_shap_results(
 ):
 
     """
+
+    load_file_path: Path to the saved model file
+    save_file_path: Path to save SHAP plots
+    refit_X: DataFrame containing input features for refitting
+    refit_y: DataFrame containing target values for refitting
+    figure_dpi: DPI value for saving figures
+
+    # Example: 
     load_file_path = best_xgb_file = get_absolute_path(
                         file_name = 'best_xgb_model.joblib'
                         , rel_path = 'results'
@@ -66,16 +74,15 @@ def gen_shap_results(
         explainer = shap.TreeExplainer(best_model)
         shap_values = explainer.shap_value(refit_X)
         shap.summary_plot(shap_values, refit_X, plot_type = 'bar')
+        plt.tight_layout()  # Ensure plots are not cut off
+        save_figure('shap_bar_plot', plt.gcf(), dpi=figure_dpi, save_location=save_file_path)
+        
         shap.summary_plot(shap_values, refit_X)
 
     else:
         print("Not implemented yet...")
-        return 
+        
 
-
-    
-
-    return 
 
 
 ## XGBoost
