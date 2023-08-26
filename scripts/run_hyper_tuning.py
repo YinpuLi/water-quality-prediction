@@ -97,12 +97,12 @@ xgb_result = hyperparameter_tuning(
         y_test=y_test,
         param_grid={
             'max_depth': [3, 5, 7],
-            'learning_rate': [0.1, 0.01, 0.001],
+            'learning_rate': [0.1, 0.01],
             'n_estimators': [50, 100, 200, 500],
             'subsample': [0.6, 0.8, 0.9, 1.0],
             'colsample_bytree': [0.8, 0.9, 1.0],
             'gamma': [0, 0.1, 0.2, 0.5, 1, 1.5, 2, 5],
-            'min_child_weight': [1, 3, 5, 10, 20, 100]
+            'min_child_weight': [1, 3, 5, 10, 20]
         },
         model=xgb.XGBRegressor(objective='reg:squarederror'),
         scoring=scoring,
