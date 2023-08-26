@@ -91,7 +91,7 @@ best_xgb_file = get_absolute_path(
 )
 
 xgb_result = hyperparameter_tuning(
-        X_train=X_train_preprocessed
+        X_train=X_train_preprocessed,
         y_train=y_train,
         X_test=X_test_preprocessed,
         y_test=y_test,
@@ -110,3 +110,33 @@ xgb_result = hyperparameter_tuning(
         file_path=best_xgb_file,
         cv=5
 ) 
+
+print("Success of xgboost!")
+
+######### Random Forest #########
+
+best_rf_file = get_absolute_path(
+    file_name = 'best_rf_model.joblib'
+    , rel_path = 'results'
+)
+
+xgb_result = hyperparameter_tuning(
+        X_train=X_train_preprocessed,
+        y_train=y_train,
+        X_test=X_test_preprocessed,
+        y_test=y_test,
+        param_grid={
+            'n_estimators': [50, 100, 200, 500],
+            'max_depth': [None, 3, 5, 10, 20],
+            'min_samples_split': [1, 2, 5, 10],
+            'min_samples_leaf': [1, 2, 4]
+        },
+        model=RandomForestRegressor(),
+        scoring=scoring,
+        eval_func=compute_metrics,
+        file_path=best_rf_file,
+        cv=5
+) 
+
+print("Success of rf!")
+

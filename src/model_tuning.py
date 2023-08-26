@@ -24,8 +24,8 @@ def hyperparameter_tuning(
         y_test: pd.DataFrame,
         param_grid: dict,
         model: Union[xgb.sklearn.XGBRegressor, RandomForestRegressor],
-        scoring: function,
-        eval_func: function,
+        scoring,
+        eval_func,
         file_path: str,
         cv: int
 ) -> dict:
@@ -97,3 +97,5 @@ def hyperparameter_tuning(
     save_model(file_name=file_path, model=best_model, model_info=best_model_info)
 
     return best_model_info
+
+

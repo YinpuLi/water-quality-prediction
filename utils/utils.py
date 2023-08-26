@@ -37,6 +37,27 @@ from utils.constants import *
 #     os.makedirs(directory, exist_ok=True)
 #     joblib.dump((model, model_info), file_name)
 
+def convert_season_to_numeric(df):
+    """
+    Convert the 'Season' column containing season names to numerical values.
+    
+    df: Pandas DataFrame containing the 'Season' column
+    
+    Returns: Pandas DataFrame with the 'Season' column converted to numerical values
+    """
+    season_mapping = {
+        'Spring': 1,
+        'Summer': 2,
+        'Fall': 3,
+        'Winter': 4
+    }
+    df['Season_Num'] = df['Season'].map(season_mapping)
+    return df
+
+def record_running_time(start_time):
+    end_time = datetime.now()
+    running_time = end_time - start_time
+    return running_time
 
 def save_model(file_name, model, model_info=None):
     """
