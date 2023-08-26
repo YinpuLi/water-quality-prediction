@@ -90,10 +90,15 @@ def hyperparameter_tuning(
     )
     eval_metrics = eval_func(_df, EVAL_METRIC_LIST)
 
-    # Get feature importance scores
-    feature_importance = best_model.feature_importances_
-    feature_names = X_train.columns
-    feature_importance_dict = dict(zip(feature_names, feature_importance))
+    # Get feature importance scores for tree based models
+
+    if isinstance(best_model, MLPRegressor): # type(best_model) == MLPRegressor
+        feature_importance_dict = {}
+    else:
+        # Get feature importance scores
+        feature_importance = best_model.feature_importances_
+        feature_names = X_train.columns
+        feature_importance_dict = dict(zip(feature_names, feature_importance))
 
     # Save the results
     best_model_info = {
