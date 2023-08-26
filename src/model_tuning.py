@@ -70,7 +70,7 @@ def hyperparameter_tuning(
     """
 
     # Perform hyperparameter tuning using GridSearchCV
-    grid_search = GridSearchCV(model, param_grid, cv=cv, scoring=scoring)
+    grid_search = GridSearchCV(model, param_grid, cv=cv, scoring=scoring, n_jobs=6, verbose=1)
     grid_search.fit(X_train, y_train)
 
     # Get the best hyperparameters and best model
