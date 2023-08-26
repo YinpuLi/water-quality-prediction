@@ -105,6 +105,7 @@ def hyperparameter_tuning(
         'best_params': best_params,
         'best_score': best_score,
         'feature_importance': feature_importance_dict,
+        'y_pred': y_pred,
         'eval_metrics': eval_metrics
     }
     

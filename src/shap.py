@@ -10,6 +10,7 @@ from sklearn.ensemble import RandomForestRegressor
 from sklearn.neural_network import MLPRegressor
 from sklearn.model_selection import GridSearchCV
 import shap
+import matplotlib.pyplot as plt
 
 root_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 sys.path.append(root_dir)
@@ -21,17 +22,26 @@ from utils.metrics   import *
 
 def gen_shap_results(
     load_file_path: str
-    , save_file_path: str
+    , save_file_path_1: str # for bar plot, showing feature importance
+    , save_file_path_2: str # for SHAP value plot
     , refit_X: pd.DataFrame
     , refit_y: pd.DataFrame
+    # , bbox_inches=None
+    # , pad_inches=0.1
+    # , facecolor='auto'
+    # , edgecolor='auto',
+    # , backend=None
     , figure_dpi: int
+    , dpi = 'figure'
+
     
 ):
 
     """
 
     load_file_path: Path to the saved model file
-    save_file_path: Path to save SHAP plots
+    save_file_path_1: Path to save SHAP bar plot
+    save_file_path_2: Path to save SHAP value plot
     refit_X: DataFrame containing input features for refitting
     refit_y: DataFrame containing target values for refitting
     figure_dpi: DPI value for saving figures
@@ -53,12 +63,12 @@ def gen_shap_results(
     """
 
     # Load the best model and its info file
-    best_model, best_model_info = load_model(file_path)
+    best_model, best_model_info = load_model(load_file_path)
 
     
     # Get the best hyperparameters and best model
     best_params = best_model_info['best_params']
-    y_pred      = best_model_info['y_pred']
+    # y_pred      = best_model_info['y_pred']
     eval_metrics= best_model_info['eval_metrics']
 
     # Refit model
@@ -72,27 +82,55 @@ def gen_shap_results(
     if isinstance(best_model, (xgb.XGBRegressor, RandomForestRegressor)):
         print("Tree Based Model...")
         explainer = shap.TreeExplainer(best_model)
-        shap_values = explainer.shap_value(refit_X)
+        shap_values = explainer.shap_values(refit_X)
         shap.summary_plot(shap_values, refit_X, plot_type = 'bar')
-        plt.tight_layout()  # Ensure plots are not cut off
-        save_figure('shap_bar_plot', plt.gcf(), dpi=figure_dpi, save_location=save_file_path)
+        plt.gcf().set_size_inches(15, 10)
+        # Create the directory if it doesn't exist
+        os.makedirs(os.path.dirname(save_file_path_1), exist_ok=True)
         
+        plt.savefig(save_file_path_1, dpi=figure_dpi)
+        plt.show()
+        
+            
+
         shap.summary_plot(shap_values, refit_X)
+        plt.gcf().set_size_inches(15, 10)
+        # Create the directory if it doesn't exist
+        os.makedirs(os.path.dirname(save_file_path_2), exist_ok=True)
+        
+        plt.savefig(save_file_path_2, dpi=figure_dpi)
+        plt.show()
+        
 
     else:
         print("Not implemented yet...")
+        return 
         
 
 
 
-## XGBoost
-best_xgb_file = get_absolute_path(
-    file_name = 'best_xgb_model.joblib'
-    , rel_path = 'results'
-)
+# ## XGBoost
+# best_xgb_file = get_absolute_path(
+#     file_name = 'best_xgb_model.joblib'
+#     , rel_path = 'results'
+# )
 
-best_xgb_shap_file = get_absolute_path(
-    file_name = 'best_xgb_shap.png'
-    , rel_path = 'results' + '/' + 'shap'
-)
+# best_xgb_shap_file_1 = get_absolute_path(
+#     file_name = 'best_xgb_shap_bar.png'
+#     , rel_path = 'results' + '/' + 'shap'
+# )
 
+
+# best_xgb_shap_file_2 = get_absolute_path(
+#     file_name = 'best_xgb_shap_val.png'
+#     , rel_path = 'results' + '/' + 'shap'
+# )
+
+# gen_shap_results(
+#     load_file_path = best_xgb_file
+#     , save_file_path_1 = best_xgb_shap_file_1
+#     , save_file_path_2 = best_xgb_shap_file_2
+#     , refit_X = X_train_preprocessed_df
+#     , refit_y = y_train
+#     , figure_dpi = 300
+# )
