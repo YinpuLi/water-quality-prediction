@@ -83,35 +83,35 @@ X_test_preprocessed_df = pd.DataFrame(X_test_preprocessed.toarray(), columns=np.
 
 scoring=make_scorer(lambda y_true, y_pred: -mean_squared_error(y_true, y_pred, squared=False))
 
-# ######### XGBoost #########
+######### XGBoost #########
 
-# best_xgb_file = get_absolute_path(
-#     file_name = 'best_xgb_model.joblib'
-#     , rel_path = 'results'
-# )
+best_xgb_file = get_absolute_path(
+    file_name = 'best_xgb_model.joblib'
+    , rel_path = 'results'
+)
 
-# xgb_result = hyperparameter_tuning(
-#         X_train=X_train_preprocessed,
-#         y_train=y_train,
-#         X_test=X_test_preprocessed,
-#         y_test=y_test,
-#         param_grid={
-#             'max_depth': [3, 5, 7],
-#             'learning_rate': [0.1, 0.01],
-#             'n_estimators': [100, 200, 500],
-#             'subsample': [0.8, 1.0],
-#             'colsample_bytree': [0.8, 1.0],
-#             'gamma': [0, 0.1, 0.5],
-#             'min_child_weight': [1, 5, 10, 20]
-#         },
-#         model=xgb.XGBRegressor(objective='reg:squarederror'),
-#         scoring=scoring,
-#         eval_func=compute_metrics,
-#         file_path=best_xgb_file,
-#         cv=5
-# ) 
+xgb_result = hyperparameter_tuning(
+        X_train=X_train_preprocessed_df,
+        y_train=y_train,
+        X_test=X_test_preprocessed_df,
+        y_test=y_test,
+        param_grid={
+            'max_depth': [3, 5, 7],
+            'learning_rate': [0.1, 0.01],
+            'n_estimators': [100, 200, 500],
+            'subsample': [0.8, 1.0],
+            'colsample_bytree': [0.8, 1.0],
+            'gamma': [0, 0.1, 0.5],
+            'min_child_weight': [1, 5, 10, 20]
+        },
+        model=xgb.XGBRegressor(objective='reg:squarederror'),
+        scoring=scoring,
+        eval_func=compute_metrics,
+        file_path=best_xgb_file,
+        cv=5
+) 
 
-# print("Success of xgboost!")
+print("Success of xgboost!")
 
 ######### Random Forest #########
 
@@ -120,10 +120,10 @@ best_rf_file = get_absolute_path(
     , rel_path = 'results'
 )
 
-xgb_result = hyperparameter_tuning(
-        X_train=X_train_preprocessed,
+rf_result = hyperparameter_tuning(
+        X_train=X_train_preprocessed_df,
         y_train=y_train,
-        X_test=X_test_preprocessed,
+        X_test=X_test_preprocessed_df,
         y_test=y_test,
         param_grid={
             'n_estimators': [50, 100, 200, 500],
@@ -140,3 +140,33 @@ xgb_result = hyperparameter_tuning(
 
 print("Success of rf!")
 
+
+
+######### MLP #########
+
+best_mlp_file = get_absolute_path(
+    file_name = 'best_mlp_model.joblib'
+    , rel_path = 'results'
+)
+
+mlp_result = hyperparameter_tuning(
+        X_train=X_train_preprocessed,
+        y_train=y_train,
+        X_test=X_test_preprocessed,
+        y_test=y_test,
+        param_grid= {
+            'hidden_layer_sizes': list(zip([1000], [300])),
+            'max_iter': [50, 100],
+            'activation': ['tanh', 'relu'],
+            'solver': ['sgd', 'adam'],
+            'alpha': [0.0001, 0.05],
+            'learning_rate': ['constant','adaptive'],
+        },
+        model=MLPRegressor(random_state=1, hidden_layer_sizes = (20, 20)),
+        scoring="neg_root_mean_squared_error",
+        eval_func=compute_metrics,
+        file_path=best_mlp_file,
+        cv=5
+) 
+
+print("Success of MLP!")
