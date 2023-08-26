@@ -83,40 +83,10 @@ X_test_preprocessed_df = pd.DataFrame(X_test_preprocessed.toarray(), columns=np.
 
 scoring=make_scorer(lambda y_true, y_pred: -mean_squared_error(y_true, y_pred, squared=False))
 
-# ######### XGBoost #########
+######### XGBoost #########
 
-# best_xgb_file = get_absolute_path(
-#     file_name = 'best_xgb_model.joblib'
-#     , rel_path = 'results'
-# )
-
-# xgb_result = hyperparameter_tuning(
-#         X_train=X_train_preprocessed,
-#         y_train=y_train,
-#         X_test=X_test_preprocessed,
-#         y_test=y_test,
-#         param_grid={
-#             'max_depth': [3, 5, 7],
-#             'learning_rate': [0.1, 0.01],
-#             'n_estimators': [100, 200, 500],
-#             'subsample': [0.8, 1.0],
-#             'colsample_bytree': [0.8, 1.0],
-#             'gamma': [0, 0.1, 0.5],
-#             'min_child_weight': [1, 5, 10, 20]
-#         },
-#         model=xgb.XGBRegressor(objective='reg:squarederror'),
-#         scoring=scoring,
-#         eval_func=compute_metrics,
-#         file_path=best_xgb_file,
-#         cv=5
-# ) 
-
-# print("Success of xgboost!")
-
-######### Random Forest #########
-
-best_rf_file = get_absolute_path(
-    file_name = 'best_rf_model.joblib'
+best_xgb_file = get_absolute_path(
+    file_name = 'best_xgb_model.joblib'
     , rel_path = 'results'
 )
 
@@ -126,17 +96,20 @@ xgb_result = hyperparameter_tuning(
         X_test=X_test_preprocessed,
         y_test=y_test,
         param_grid={
-            'n_estimators': [50, 100, 200, 500],
-            'max_depth': [None, 3, 5, 10, 20],
-            'min_samples_split': [1, 2, 5, 10],
-            'min_samples_leaf': [1, 2, 4]
+            'max_depth': [3, 5, 7],
+            'learning_rate': [0.1, 0.01],
+            'n_estimators': [100, 200, 500],
+            'subsample': [0.8, 1.0],
+            'colsample_bytree': [0.8, 1.0],
+            'gamma': [0, 0.1, 0.5],
+            'min_child_weight': [1, 5, 10, 20]
         },
-        model=RandomForestRegressor(),
+        model=xgb.XGBRegressor(objective='reg:squarederror'),
         scoring=scoring,
         eval_func=compute_metrics,
-        file_path=best_rf_file,
+        file_path=best_xgb_file,
         cv=5
 ) 
 
-print("Success of rf!")
+print("Success of xgboost!")
 
