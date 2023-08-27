@@ -33,8 +33,6 @@ def gen_shap_results(
     # , backend=None
     , figure_dpi: int
     , dpi = 'figure'
-
-    
 ):
 
     """
@@ -100,7 +98,21 @@ def gen_shap_results(
         
         plt.savefig(save_file_path_2, dpi=figure_dpi)
         plt.show()
+    
+    elif isinstance(best_model, MLPRegressor):
+        print("NN Model...")
+        refit_X_summary = shap.kmeans(refit_X, 10)
+        explainer = shap.KernelExplainer(best_model, refit_X_summary)
+        shap_values = explainer.shap_values(refit_X) # TODO: why not refit_X_summary?
+        shap.summary_plot(shap_values, refit_X, plot_type = 'bar') # TODO: why not refit_X_summary?
+        plt.gcf().set_size_inches(15, 10)
+        # Create the directory if it doesn't exist
+        os.makedirs(os.path.dirname(save_file_path_1), exist_ok=True)
         
+        plt.savefig(save_file_path_1, dpi=figure_dpi)
+        plt.show()
+
+
 
     else:
         print("Not implemented yet...")
