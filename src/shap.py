@@ -70,8 +70,7 @@ def gen_shap_results(
     # y_pred      = best_model_info['y_pred']
     eval_metrics= best_model_info['eval_metrics']
 
-    # Refit model
-    refit_model = best_model.fit(refit_X, refit_y)
+    
 
     # Using SHAP
     np.bool = np.bool_
@@ -80,6 +79,8 @@ def gen_shap_results(
     ## Tree based methods and other methods are handled separately
     if isinstance(best_model, (xgb.XGBRegressor, RandomForestRegressor)):
         print("Tree Based Model...")
+        # # Refit model
+        # refit_model = best_model.fit(refit_X, refit_y)
         explainer = shap.TreeExplainer(best_model)
         shap_values = explainer.shap_values(refit_X)
         shap.summary_plot(shap_values, refit_X, plot_type = 'bar')
@@ -100,6 +101,8 @@ def gen_shap_results(
     
     elif isinstance(best_model, MLPRegressor):
         print("MLP Model...")
+        # # Refit model
+        # refit_model = best_model.fit(refit_X, refit_y)
         refit_X_summary = shap.kmeans(refit_X, 10)
         explainer = shap.KernelExplainer(best_model, refit_X_summary)
         shap_values = explainer.shap_values(refit_X) # TODO: why not refit_X_summary?
