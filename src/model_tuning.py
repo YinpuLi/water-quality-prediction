@@ -5,6 +5,7 @@ import ast
 from typing import Union
 import xgboost as xgb
 import lightgbm as lgb
+from sklearn.linear_model import ElasticNet
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.neural_network import MLPRegressor
 from sklearn.model_selection import GridSearchCV
@@ -26,7 +27,7 @@ def hyperparameter_tuning(
         y_test: pd.DataFrame,
         param_grid: dict,
         model: Union[xgb.sklearn.XGBRegressor, RandomForestRegressor
-                     , lgb.LGBMRegressor, MLPRegressor
+                     , lgb.LGBMRegressor, MLPRegressor, ElasticNet
                      ],
         scoring,
         eval_func,
@@ -92,7 +93,7 @@ def hyperparameter_tuning(
 
     # Get feature importance scores for tree based models
 
-    if isinstance(best_model, MLPRegressor): # type(best_model) == MLPRegressor
+    if isinstance(best_model, (MLPRegressor, ElasticNet)): # type(best_model) == MLPRegressor
         feature_importance_dict = {}
     else:
         # Get feature importance scores
