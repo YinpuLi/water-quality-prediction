@@ -99,7 +99,7 @@ def gen_shap_results(
         plt.show()
     
     elif isinstance(best_model, MLPRegressor):
-        print("NN Model...")
+        print("MLP Model...")
         refit_X_summary = shap.kmeans(refit_X, 10)
         explainer = shap.KernelExplainer(best_model, refit_X_summary)
         shap_values = explainer.shap_values(refit_X) # TODO: why not refit_X_summary?
@@ -184,6 +184,53 @@ def generate_file_paths_for_shap(
     best_shap_file_2 = get_absolute_path(
         file_name='best_' + model_name + '_shap_val.png',
         rel_path=rel_path + '/' + 'shap'
+    )
+    
+    # Add generated file paths to the list
+    file_paths.extend([best_model_file, best_shap_file_1, best_shap_file_2])
+
+    return file_paths
+
+
+
+def generate_file_paths_for_shap_2(
+    model_name: str,  # Name of the model (e.g., 'xgb', 'rf')
+    rel_path: str     # Relative path to the directory where files should be saved
+) -> list:
+    """
+    Generate file paths for model-related files.
+
+    Parameters:
+        model_name (str): Name of the model (e.g., 'xgb', 'rf')
+        rel_path (str): Relative path to the directory where files should be saved
+
+    Returns:
+        list: A list of generated file paths
+
+    # Example: # Using the function with 'xgb' model name and 'results' relative path
+    model_name = 'xgb'
+    rel_path = 'results'
+    xgb_file_paths = generate_file_paths_for_shap(model_name, rel_path)
+    print("XGBoost Model File Paths:", xgb_file_paths)
+
+    XGBoost Model File Paths: ['/Users/yinpuli/Documents/python-projects/water-quality-prediction/results/best_xgb_model.joblib', '/Users/yinpuli/Documents/python-projects/water-quality-prediction/results/shap/best_xgb_shap_bar.png', '/Users/yinpuli/Documents/python-projects/water-quality-prediction/results/shap/best_xgb_shap_val.png']
+    Random Forest Model File Paths: ['/Users/yinpuli/Documents/python-projects/water-quality-prediction/results/best_rf_model.joblib', '/Users/yinpuli/Documents/python-projects/water-quality-prediction/results/shap/best_rf_shap_bar.png', '/Users/yinpuli/Documents/python-projects/water-quality-prediction/results/shap/best_rf_shap_val.png']
+    MLP Model File Paths: ['/Users/yinpuli/Documents/python-projects/water-quality-prediction/results/best_mlp_model.joblib', '/Users/yinpuli/Documents/python-projects/water-quality-prediction/results/shap/best_mlp_shap_bar.png', '/Users/yinpuli/Documents/python-projects/water-quality-prediction/results/shap/best_mlp_shap_val.png']
+    """
+    file_paths = []
+
+    # Generate file paths
+    best_model_file = get_absolute_path(
+        file_name='best_' + model_name + '_model.joblib',
+        rel_path=rel_path
+    )
+    best_shap_file_1 = get_absolute_path(
+        file_name='best_' + model_name + '_shap_bar.png',
+        rel_path=rel_path + '/' + 'shap_on_test'
+    )
+    best_shap_file_2 = get_absolute_path(
+        file_name='best_' + model_name + '_shap_val.png',
+        rel_path=rel_path + '/' + 'shap_on_test'
     )
     
     # Add generated file paths to the list

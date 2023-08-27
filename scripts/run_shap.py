@@ -81,7 +81,35 @@ X_train_preprocessed_df = pd.DataFrame(X_train_preprocessed.toarray(), columns=n
 X_test_preprocessed_df = pd.DataFrame(X_test_preprocessed.toarray(), columns=np.concatenate([numeric_columns, categorical_encoded_columns]))
 
 
-########### Generate SHAP results
+# ########### Generate SHAP results
+
+
+# # List of model names
+# model_names = ['xgb', 'rf' , 'mlp', 'lin'
+# ]
+
+# # Relative path
+# rel_path = 'results'
+
+# # # Dictionary to store file paths for each model
+# # model_file_paths = {}
+
+# # Loop through each model name
+# for model_name in model_names:
+#     file_paths = generate_file_paths_for_shap(model_name, rel_path)
+#     # model_file_paths[model_name] = file_paths
+#     print(f"{model_name.capitalize()} Model File Paths:", file_paths)
+
+#     gen_shap_results(
+#         load_file_path = file_paths[0]
+#         , save_file_path_1 = file_paths[1]
+#         , save_file_path_2 = file_paths[2]
+#         , refit_X = X_train_preprocessed_df
+#         , refit_y = y_train
+#         , figure_dpi = 300
+#     )
+
+########### Generate SHAP results on test set
 
 
 # List of model names
@@ -89,14 +117,14 @@ model_names = ['xgb', 'rf' , 'mlp', 'lin'
 ]
 
 # Relative path
-rel_path = 'results'
+rel_path = 'results' 
 
 # # Dictionary to store file paths for each model
 # model_file_paths = {}
 
 # Loop through each model name
 for model_name in model_names:
-    file_paths = generate_file_paths_for_shap(model_name, rel_path)
+    file_paths = generate_file_paths_for_shap_2(model_name, rel_path)
     # model_file_paths[model_name] = file_paths
     print(f"{model_name.capitalize()} Model File Paths:", file_paths)
 
@@ -104,10 +132,9 @@ for model_name in model_names:
         load_file_path = file_paths[0]
         , save_file_path_1 = file_paths[1]
         , save_file_path_2 = file_paths[2]
-        , refit_X = X_train_preprocessed_df
-        , refit_y = y_train
+        , refit_X = X_test_preprocessed_df
+        , refit_y = y_test
         , figure_dpi = 300
     )
-
 
 
