@@ -30,3 +30,6 @@ db.sqlite3
 # Ignore package manager files
 docs/yl_learnings
 
+# Ignore large files
+
+*.joblib
