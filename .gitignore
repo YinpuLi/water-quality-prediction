@@ -33,3 +33,5 @@ docs/yl_learnings
 # Ignore large files
 
 *.joblib
+
+LightGBM/
