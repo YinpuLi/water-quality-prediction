@@ -14,6 +14,8 @@ from sklearn.preprocessing import StandardScaler, OneHotEncoder
 from sklearn.compose import ColumnTransformer
 from sklearn.pipeline import Pipeline
 
+plt.ioff() # Turn off interactive mode for matplotlib, preventing plots from being displayed interactively
+
 
 import warnings
 warnings.filterwarnings("ignore", category=DeprecationWarning)

@@ -117,7 +117,8 @@ def gen_shap_results(
         os.makedirs(os.path.dirname(save_file_path_1), exist_ok=True)
         
         plt.savefig(save_file_path_1, dpi=figure_dpi)
-        plt.show()
+        # plt.show()
+        plt.clf()  # Clear the figure
 
         shap.summary_plot(shap_values, refit_X)
         plt.gcf().set_size_inches(15, 10)
@@ -125,7 +126,8 @@ def gen_shap_results(
         os.makedirs(os.path.dirname(save_file_path_2), exist_ok=True)
         
         plt.savefig(save_file_path_2, dpi=figure_dpi)
-        plt.show()
+        # plt.show()
+        plt.clf()  # Clear the figure
     
     elif isinstance(best_model, ElasticNet):
         print("Penalized Linear Model...")
@@ -138,7 +140,8 @@ def gen_shap_results(
         os.makedirs(os.path.dirname(save_file_path_1), exist_ok=True)
         
         plt.savefig(save_file_path_1, dpi=figure_dpi)
-        plt.show()
+        # plt.show()
+        plt.clf()  # Clear the figure
         
         shap.summary_plot(shap_values, refit_X)
         plt.gcf().set_size_inches(15, 10)
@@ -146,7 +149,8 @@ def gen_shap_results(
         os.makedirs(os.path.dirname(save_file_path_2), exist_ok=True)
         
         plt.savefig(save_file_path_2, dpi=figure_dpi)
-        plt.show()
+        # plt.show()
+        plt.clf()  # Clear the figure
 
 
     else:
