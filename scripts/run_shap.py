@@ -85,7 +85,7 @@ X_test_preprocessed_df = pd.DataFrame(X_test_preprocessed.toarray(), columns=np.
 
 
 # List of model names
-model_names = ['xgb', 'rf'# , 'mlp'
+model_names = ['xgb', 'rf' , 'mlp', 'lin'
 ]
 
 # Relative path

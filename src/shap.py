@@ -6,6 +6,7 @@ import ast
 from typing import Union
 import xgboost as xgb
 import lightgbm as lgb
+from sklearn.linear_model import ElasticNet
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.neural_network import MLPRegressor
 from sklearn.model_selection import GridSearchCV
@@ -76,7 +77,7 @@ def gen_shap_results(
     np.bool = np.bool_
     np.int = np.int_
 
-    ## Tree based methods are handled 
+    ## Tree based methods and other methods are handled separately
     if isinstance(best_model, (xgb.XGBRegressor, RandomForestRegressor)):
         print("Tree Based Model...")
         explainer = shap.TreeExplainer(best_model)
@@ -89,8 +90,6 @@ def gen_shap_results(
         plt.savefig(save_file_path_1, dpi=figure_dpi)
         plt.show()
         
-            
-
         shap.summary_plot(shap_values, refit_X)
         plt.gcf().set_size_inches(15, 10)
         # Create the directory if it doesn't exist
@@ -112,6 +111,34 @@ def gen_shap_results(
         plt.savefig(save_file_path_1, dpi=figure_dpi)
         plt.show()
 
+        shap.summary_plot(shap_values, refit_X)
+        plt.gcf().set_size_inches(15, 10)
+        # Create the directory if it doesn't exist
+        os.makedirs(os.path.dirname(save_file_path_2), exist_ok=True)
+        
+        plt.savefig(save_file_path_2, dpi=figure_dpi)
+        plt.show()
+    
+    elif isinstance(best_model, ElasticNet):
+        print("Penalized Linear Model...")
+        explainer = shap.LinearExplainer(best_model, refit_X)
+        shap_values = explainer.shap_values(refit_X)
+
+        shap.summary_plot(shap_values, refit_X, plot_type = 'bar')
+        plt.gcf().set_size_inches(15, 10)
+        # Create the directory if it doesn't exist
+        os.makedirs(os.path.dirname(save_file_path_1), exist_ok=True)
+        
+        plt.savefig(save_file_path_1, dpi=figure_dpi)
+        plt.show()
+        
+        shap.summary_plot(shap_values, refit_X)
+        plt.gcf().set_size_inches(15, 10)
+        # Create the directory if it doesn't exist
+        os.makedirs(os.path.dirname(save_file_path_2), exist_ok=True)
+        
+        plt.savefig(save_file_path_2, dpi=figure_dpi)
+        plt.show()
 
 
     else:
