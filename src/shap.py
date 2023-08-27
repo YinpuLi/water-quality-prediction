@@ -104,7 +104,10 @@ def gen_shap_results(
         # # Refit model
         # refit_model = best_model.fit(refit_X, refit_y)
         refit_X_summary = shap.kmeans(refit_X, 10)
-        explainer = shap.KernelExplainer(best_model, refit_X_summary)
+        # Use the predict method of MLPRegressor to get predictions
+        predict_fn = best_model.predict
+
+        explainer = shap.KernelExplainer(predict_fn, refit_X_summary)
         shap_values = explainer.shap_values(refit_X) # TODO: why not refit_X_summary?
         shap.summary_plot(shap_values, refit_X, plot_type = 'bar') # TODO: why not refit_X_summary?
         plt.gcf().set_size_inches(15, 10)
