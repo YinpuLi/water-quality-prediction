@@ -101,6 +101,8 @@ def gen_shap_results(
     
     elif isinstance(best_model, MLPRegressor):
         print("MLP Model...")
+        print("This is problematic... I give up")
+        print("Check _test_run_shap_on_testset_py_mlp.ipynb and _test_run_shap_py.ipynb; cell blocks that are related to MLP...")
         # # Refit model
         # refit_model = best_model.fit(refit_X, refit_y)
         refit_X_summary = shap.kmeans(refit_X, 10)
