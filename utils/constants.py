@@ -71,3 +71,5 @@ column_names_extended = [
 
 
 EVAL_METRIC_LIST = ['rmse','mape','wmape','wbias','wuforec','woforec']
+
+RANDOM_SEED = 827 # global random_state
