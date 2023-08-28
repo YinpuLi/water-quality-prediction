@@ -3,7 +3,7 @@ import os
 import sys
 from typing import Union
 import xgboost as xgb
-import lightgbm as lgb
+# import lightgbm as lgb 
 from sklearn.linear_model import ElasticNet
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.neural_network import MLPRegressor
@@ -26,7 +26,8 @@ def hyperparameter_tuning(
         y_test: pd.DataFrame,
         param_grid: dict,
         model: Union[xgb.sklearn.XGBRegressor, RandomForestRegressor
-                     , lgb.LGBMRegressor, MLPRegressor, ElasticNet
+                    #  , lgb.LGBMRegressor
+                     , MLPRegressor, ElasticNet
                      ],
         scoring,
         eval_func,
