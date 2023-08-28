@@ -25,7 +25,7 @@ from utils.constants import *
 #     model_info (dict, optional): Additional information about the model (default: None).
 
 #     # Usage example
-#     best_model = xgb.XGBRegressor(objective='reg:squarederror')
+#     best_model = xgb.XGBRegressor(objective='reg:squarederror', random_state=RANDOM_SEED)
 #     best_params = {'max_depth': 5, 'learning_rate': 0.01, 'n_estimators': 100}
 #     best_score = 0.85
 #     model_info = {'best_params': best_params, 'best_score': best_score}

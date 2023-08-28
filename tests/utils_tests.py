@@ -25,11 +25,6 @@ stacked_X_te.columns = feature_names + ['Date', 'Location_ID']
 
 
 
-
-stacked_X_tr = stacked_X_tr.astype(column_data_types)
-stacked_X_te = stacked_X_te.astype(column_data_types)
-
-
 print(stacked_X_tr.head)
 print(stacked_X_te.head)
 

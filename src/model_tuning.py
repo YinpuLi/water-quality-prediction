@@ -57,7 +57,7 @@ def hyperparameter_tuning(
     y_train = y_train
     X_test  = X_test_preprocessed
     y_test = y_test
-    model = xgb.XGBRegressor(objective='reg:squarederror') # RandomForestRegressor()
+    model = xgb.XGBRegressor(objective='reg:squarederror', random_state=RANDOM_SEED) # RandomForestRegressor()
     scoring = make_scorer(lambda y_true, y_pred: -mean_squared_error(y_true, y_pred, squared=False))
     param_grid = {
         'n_estimators': [50, 100],
@@ -71,7 +71,7 @@ def hyperparameter_tuning(
     """
 
     # Perform hyperparameter tuning using GridSearchCV
-    grid_search = GridSearchCV(model, param_grid, cv=cv, scoring=scoring, n_jobs=6, verbose=1)
+    grid_search = GridSearchCV(model, param_grid, cv=cv, scoring=scoring, n_jobs=6, verbose=1, random_state=RANDOM_SEED)
     grid_search.fit(X_train, y_train)
 
     # Get the best hyperparameters and best model

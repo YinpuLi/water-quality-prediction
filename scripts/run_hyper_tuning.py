@@ -104,7 +104,7 @@ xgb_result = hyperparameter_tuning(
             'gamma': [0, 0.1, 0.5],
             'min_child_weight': [1, 5, 10, 20]
         },
-        model=xgb.XGBRegressor(objective='reg:squarederror'),
+        model=xgb.XGBRegressor(objective='reg:squarederror', random_state=RANDOM_SEED),
         scoring=scoring,
         eval_func=compute_metrics,
         file_path=best_xgb_file,
@@ -131,7 +131,7 @@ rf_result = hyperparameter_tuning(
             'min_samples_split': [1, 2, 5, 10],
             'min_samples_leaf': [1, 2, 4]
         },
-        model=RandomForestRegressor(),
+        model=RandomForestRegressor(random_state=RANDOM_SEED),
         scoring=scoring,
         eval_func=compute_metrics,
         file_path=best_rf_file,
