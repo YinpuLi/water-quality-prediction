@@ -129,7 +129,7 @@ rsa==4.9
 s3transfer @ file:///Users/ec2-user/ci_py311/s3transfer_1678324574832/work
 sacremoses==0.0.43
 safetensors @ file:///Users/yinpuli/safetensors/bindings/python
-scikit-learn==1.2.2
+scikit-learn==1.3.0
 scipy==1.11.2
 seaborn==0.12.2
 semantic-version==2.10.0
