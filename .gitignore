@@ -10,6 +10,7 @@ __pycache__/
 venv/
 env/
 *.env
+.venv
 
 # Ignore local development config
 config.local.json
@@ -32,6 +33,6 @@ docs/yl_learnings
 
 # Ignore large files
 
-*.joblib
+# *.joblib
 results/best_rf_model.joblib
 LightGBM/
