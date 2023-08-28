@@ -69,8 +69,6 @@ def gen_shap_results(
     ## Tree based methods and other methods are handled separately
     if isinstance(best_model, (xgb.XGBRegressor, RandomForestRegressor)):
         print("Tree Based Model...")
-        # # Refit model
-        # refit_model = best_model.fit(refit_X, refit_y)
         explainer = shap.TreeExplainer(best_model)
         shap_values = explainer.shap_values(refit_X)
         shap.summary_plot(shap_values, refit_X, plot_type = 'bar')
@@ -93,8 +91,6 @@ def gen_shap_results(
         print("MLP Model...")
         print("This is problematic... I give up")
         print("Check _test_run_shap_on_testset_py_mlp.ipynb and _test_run_shap_py.ipynb; cell blocks that are related to MLP...")
-        # # Refit model
-        # refit_model = best_model.fit(refit_X, refit_y)
         refit_X_summary = shap.kmeans(refit_X, 10, random_state=RANDOM_SEED)
         # Use the predict method of MLPRegressor to get predictions
         predict_fn = best_model.predict

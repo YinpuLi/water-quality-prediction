@@ -6,5 +6,5 @@ clean:
 
 update:
 	python scripts/run_hyper_tuning.py
-	python scripts/run_shap.py
+#	python scripts/run_shap.py
 	python scripts/inference.py

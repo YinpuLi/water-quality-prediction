@@ -102,7 +102,8 @@ xgb_result = hyperparameter_tuning(
             'subsample': [0.8, 1.0],
             'colsample_bytree': [0.8, 1.0],
             'gamma': [0, 0.1, 0.5],
-            'min_child_weight': [1, 5, 10, 20]
+            'min_child_weight': [1, 5, 10, 20],
+            'random_state': [RANDOM_SEED]
         },
         model=xgb.XGBRegressor(objective='reg:squarederror', random_state=RANDOM_SEED),
         scoring=scoring,
@@ -129,7 +130,8 @@ rf_result = hyperparameter_tuning(
             'n_estimators': [50, 100, 200, 500],
             'max_depth': [None, 3, 5, 10, 20],
             'min_samples_split': [1, 2, 5, 10],
-            'min_samples_leaf': [1, 2, 4]
+            'min_samples_leaf': [1, 2, 4],
+            'random_state': [RANDOM_SEED]
         },
         model=RandomForestRegressor(random_state=RANDOM_SEED),
         scoring=scoring,
@@ -161,8 +163,9 @@ mlp_result = hyperparameter_tuning(
             'solver': ['sgd', 'adam'],
             'alpha': [0.0001, 0.05],
             'learning_rate': ['constant','adaptive'],
+            'random_state': [RANDOM_SEED]
         },
-        model=MLPRegressor(random_state=1, hidden_layer_sizes = (20, 20)),
+        model=MLPRegressor(random_state=RANDOM_SEED, hidden_layer_sizes = (20, 20)),
         scoring="neg_root_mean_squared_error",
         eval_func=compute_metrics,
         file_path=best_mlp_file,
@@ -172,27 +175,28 @@ mlp_result = hyperparameter_tuning(
 print("Success of MLP!")
 
 
-# ######### ElasticNet #########
+######### ElasticNet #########
 
-# best_lin_file = get_absolute_path(
-#     file_name = 'best_lin_model.joblib'
-#     , rel_path = 'results'
-# )
+best_lin_file = get_absolute_path(
+    file_name = 'best_lin_model.joblib'
+    , rel_path = 'results'
+)
 
-# lin_result = hyperparameter_tuning(
-#         X_train=X_train_preprocessed_df,
-#         y_train=y_train,
-#         X_test=X_test_preprocessed_df,
-#         y_test=y_test,
-#         param_grid={
-#             "alpha":[0.01, 0.001, 0.0001, 0.00001, 0.000001],
-#             "l1_ratio": [0, 0.1, 0.3, 0.5, 0.8, 1]
-#         },
-#         model=ElasticNet(random_state=0, l1_ratio=1, alpha = 0.00001).fit(X_train_preprocessed_df,y_train),
-#         scoring="neg_root_mean_squared_error",
-#         eval_func=compute_metrics,
-#         file_path=best_lin_file,
-#         cv=5
-# ) 
+lin_result = hyperparameter_tuning(
+        X_train=X_train_preprocessed_df,
+        y_train=y_train,
+        X_test=X_test_preprocessed_df,
+        y_test=y_test,
+        param_grid={
+            "alpha":[0.01, 0.001, 0.0001, 0.00001, 0.000001],
+            "l1_ratio": [0, 0.1, 0.3, 0.5, 0.8, 1],
+            'random_state': [RANDOM_SEED]
+        },
+        model=ElasticNet(random_state=RANDOM_SEED, l1_ratio=1, alpha = 0.00001).fit(X_train_preprocessed_df,y_train),
+        scoring="neg_root_mean_squared_error",
+        eval_func=compute_metrics,
+        file_path=best_lin_file,
+        cv=5
+) 
 
-# print("Success of ElasticNet!")
+print("Success of ElasticNet!")
