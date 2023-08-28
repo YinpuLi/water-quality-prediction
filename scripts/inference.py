@@ -13,7 +13,7 @@ from src.shap import *
 
 # List of model names
 model_names = ['xgb', 'rf' , 
-            #    'mlp',
+               'mlp',
                  'lin'
 ]
 
