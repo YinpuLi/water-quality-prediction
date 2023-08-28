@@ -188,7 +188,7 @@ lin_result = hyperparameter_tuning(
             "l1_ratio": [0, 0.1, 0.3, 0.5, 0.8, 1],
             'random_state': [RANDOM_SEED]
         },
-        model=ElasticNet(random_state=RANDOM_SEED, l1_ratio=1, alpha = 0.00001).fit(X_train_preprocessed_df,y_train),
+        model=ElasticNet(random_state=RANDOM_SEED, l1_ratio=1).fit(X_train_preprocessed_df,y_train),
         scoring="neg_root_mean_squared_error",
         eval_func=compute_metrics,
         file_path=best_lin_file,
