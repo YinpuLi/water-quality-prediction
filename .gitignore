@@ -33,5 +33,5 @@ docs/yl_learnings
 # Ignore large files
 
 *.joblib
-results/
+results/best_rf_model.joblib
 LightGBM/
