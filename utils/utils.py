@@ -241,7 +241,8 @@ def stack_dataframes(loaded_data):
 def get_absolute_path(
           file_name:str='water_dataset.mat'
           , rel_path:str='data'
-          , base_dir = '/Users/yinpuli/Documents/python-projects/water-quality-prediction'#os.path.abspath(os.path.join(os.getcwd(), '..'))
+          , base_dir: str = os.path.abspath(os.path.dirname(__file__))
+        #   , base_dir = '/Users/yinpuli/Documents/python-projects/water-quality-prediction'#os.path.abspath(os.path.join(os.getcwd(), '..'))
 ):
      return os.path.join(base_dir, rel_path, file_name)
 
