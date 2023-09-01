@@ -1,14 +1,8 @@
-import pandas as pd
 import os
 import sys
-import ast
 
-root_dir = os.path.abspath(os.path.join(os.getcwd(), '..'))
+root_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 sys.path.append(root_dir)
-
-
-# root_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
-# sys.path.append(root_dir)
 
 
 
@@ -18,7 +12,14 @@ from utils.constants import *
 
 data_path = get_absolute_path('water_dataset.mat', 'data')
 data = load_data(data_path)
+
 x_train = data['X_tr']
+
+
+print(type(data))
+print(data.keys())
+
+
 x_test = data['X_te']
 y_train= data['Y_tr']
 y_test= data['Y_te']
@@ -42,7 +43,7 @@ y_train.columns = y_test.columns = ['measurement']
 print(df_train.head())
 print(y_test.head()) # (15651, 11): 423 * 37
 
-print(df_test.shape)
+print(df_test.shape) # (10434, 11)
 print( y_test.shape)
 
 
@@ -50,5 +51,4 @@ save_csv(df_train, 'data/X_train.csv')
 save_csv(y_train, 'data/y_train.csv')
 save_csv(df_test, 'data/X_test.csv')
 save_csv(y_test,  'data/y_test.csv')
-
 
