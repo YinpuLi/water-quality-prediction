@@ -14,29 +14,6 @@ sys.path.append(root_dir)
 from utils.constants import *
 
 
-
-# def save_model(file_name, model, model_info=None):
-#     """
-#     Save a model and its associated info (if provided) to a file using joblib.
-
-#     Parameters:
-#     file_name (str): The name of the file to save the model.
-#     model (object): The model object to be saved.
-#     model_info (dict, optional): Additional information about the model (default: None).
-
-#     # Usage example
-#     best_model = xgb.XGBRegressor(objective='reg:squarederror', random_state=RANDOM_SEED)
-#     best_params = {'max_depth': 5, 'learning_rate': 0.01, 'n_estimators': 100}
-#     best_score = 0.85
-#     model_info = {'best_params': best_params, 'best_score': best_score}
-
-#     save_model('best_xgb_model.joblib', best_model, model_info)
-
-#     """
-#     directory = os.path.dirname(file_name)
-#     os.makedirs(directory, exist_ok=True)
-#     joblib.dump((model, model_info), file_name)
-
 def convert_season_to_numeric(df):
     """
     Convert the 'Season' column containing season names to numerical values.
@@ -264,6 +241,7 @@ def stack_dataframes(loaded_data):
 def get_absolute_path(
           file_name:str='water_dataset.mat'
           , rel_path:str='data'
+        #   , base_dir: str = os.path.abspath(os.path.dirname(__file__))
           , base_dir = '/Users/yinpuli/Documents/python-projects/water-quality-prediction'#os.path.abspath(os.path.join(os.getcwd(), '..'))
 ):
      return os.path.join(base_dir, rel_path, file_name)

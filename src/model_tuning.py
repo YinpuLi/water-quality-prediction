@@ -1,10 +1,9 @@
 import pandas as pd
 import os
 import sys
-import ast
 from typing import Union
 import xgboost as xgb
-import lightgbm as lgb
+# import lightgbm as lgb 
 from sklearn.linear_model import ElasticNet
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.neural_network import MLPRegressor
@@ -27,7 +26,8 @@ def hyperparameter_tuning(
         y_test: pd.DataFrame,
         param_grid: dict,
         model: Union[xgb.sklearn.XGBRegressor, RandomForestRegressor
-                     , lgb.LGBMRegressor, MLPRegressor, ElasticNet
+                    #  , lgb.LGBMRegressor
+                     , MLPRegressor, ElasticNet
                      ],
         scoring,
         eval_func,
@@ -71,7 +71,7 @@ def hyperparameter_tuning(
     """
 
     # Perform hyperparameter tuning using GridSearchCV
-    grid_search = GridSearchCV(model, param_grid, cv=cv, scoring=scoring, n_jobs=6, verbose=1, random_state=RANDOM_SEED)
+    grid_search = GridSearchCV(model, param_grid, cv=cv, scoring=scoring, n_jobs=6, verbose=1)
     grid_search.fit(X_train, y_train)
 
     # Get the best hyperparameters and best model
